@@ -30,11 +30,22 @@
             position: absolute; /* Added */
             top: -1.5rem; /* Adjust as needed */
         }
+        #daysLabel {
+        white-space: nowrap; /* Prevents line breaks */
+    }
+    .label span {
+        margin-right: 120px; /* Adjust as needed */
+    }
     </style>
 </head>
 <body>
     <div class="neon">
-        <div id="daysLabel" class="label">Days    Hours    Minutes    Seconds</div>
+        <div id="daysLabel" class="label">
+            <span>Days</span>
+            <span>Hours</span>
+            <span>Minutes</span>
+            <span>Seconds</span>
+        </div>
         <span id="days"></span>:
         <span id="hours"></span>:
         <span id="minutes"></span>:
