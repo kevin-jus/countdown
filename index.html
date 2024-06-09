@@ -11,44 +11,88 @@
       color: red; /* Set text color to red */
       text-align: center; /* Center align text */
       padding-top: 50px; /* Add some padding at the top */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
     }
 
-    .countdown {
-      font-size: 48px; /* Increase font size for better readability */
-      margin-bottom: 20px; /* Add some space below the countdown */
+    .flip-clock {
+      display: inline-block;
+      font-size: 48px;
+    }
+
+    .flip-clock-piece {
+      display: inline-block;
+      width: 80px; /* Adjust the width to fit the numbers */
+      text-align: center;
+      border-radius: 5px;
+      background-color: black;
+      padding: 10px;
+      margin: 5px;
+      box-shadow: 0px 0px 10px 0px rgba(255, 0, 0, 0.75); /* Add a shadow effect */
+    }
+
+    .flip-clock-piece .flip-clock-number {
+      display: inline-block;
+      line-height: 1;
+    }
+
+    .flip-clock-divider {
+      display: inline-block;
+      margin: 0 5px;
+      font-size: 48px;
     }
   </style>
 </head>
 <body>
-  <div class="countdown" id="countdown"></div>
+  <div class="flip-clock">
+    <div class="flip-clock-piece">
+      <div class="flip-clock-number" id="days">00</div>
+      <div class="flip-clock-number" id="days"></div>
+    </div>
+    <div class="flip-clock-divider">&#8596;</div>
+    <div class="flip-clock-piece">
+      <div class="flip-clock-number" id="hours">00</div>
+      <div class="flip-clock-number" id="hours"></div>
+    </div>
+    <div class="flip-clock-divider">&#8596;</div>
+    <div class="flip-clock-piece">
+      <div class="flip-clock-number" id="minutes">00</div>
+      <div class="flip-clock-number" id="minutes"></div>
+    </div>
+    <div class="flip-clock-divider">&#8596;</div>
+    <div class="flip-clock-piece">
+      <div class="flip-clock-number" id="seconds">00</div>
+      <div class="flip-clock-number" id="seconds"></div>
+    </div>
+  </div>
+
   <script>
-    // Set the date we're counting down to
-    var countDownDate = new Date("July 27, 2024 00:00:00").getTime();
+    function updateClock() {
+      var now = new Date();
+      var target = new Date("July 27, 2024 00:00:00");
+      var diff = Math.floor((target - now) / 1000);
 
-    // Update the countdown every 1 second
-    var x = setInterval(function() {
-      // Get the current date and time
-      var now = new Date().getTime();
+      var days = Math.floor(diff / (24 * 60 * 60));
+      var hours = Math.floor((diff % (24 * 60 * 60)) / (60 * 60));
+      var minutes = Math.floor((diff % (60 * 60)) / 60);
+      var seconds = Math.floor(diff % 60);
 
-      // Calculate the distance between now and the countdown date
-      var distance = countDownDate - now;
+      document.getElementById('days').innerText = pad(days);
+      document.getElementById('hours').innerText = pad(hours);
+      document.getElementById('minutes').innerText = pad(minutes);
+      document.getElementById('seconds').innerText = pad(seconds);
+    }
 
-      // Calculate days, hours, minutes, and seconds
-      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    function pad(num) {
+      return (num < 10 ? '0' : '') + num;
+    }
 
-      // Display the result in the element with id="countdown"
-      document.getElementById("countdown").innerHTML = days + " days " + hours + " hours "
-      + minutes + " minutes " + seconds + " seconds ";
-
-      // If the countdown is over, display a message
-      if (distance < 0) {
-        clearInterval(x);
-        document.getElementById("countdown").innerHTML = "EXPIRED";
-      }
-    }, 1000);
+    updateClock();
+    setInterval(updateClock, 1000);
   </script>
 </body>
 </html>
