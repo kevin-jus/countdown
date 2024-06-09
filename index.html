@@ -3,87 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Countdown</title>
+  <title>Countdown Timer</title>
   <style>
-    body, html {
-      height: 100%;
-      margin: 0;
-      overflow: hidden;
-    }
-
-    .background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('siren.jpg');
-      background-size: cover;
-      animation: blur 10s infinite alternate;
-    }
-
-    .siren {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, red, blue, white);
-      border-radius: 50%;
-      animation: siren-light 2s infinite alternate;
+    body {
+      font-family: Arial, sans-serif;
+      background-color: black; /* Set background color to black */
+      color: red; /* Set text color to red */
+      text-align: center; /* Center align text */
+      padding-top: 50px; /* Add some padding at the top */
     }
 
     .countdown {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 24px;
-      color: white;
-      text-align: center;
-    }
-
-    @keyframes blur {
-      0% { filter: blur(0px); }
-      100% { filter: blur(10px); }
-    }
-
-    @keyframes siren-light {
-      0% { box-shadow: 0 0 20px red, 0 0 50px blue, 0 0 100px white; }
-      50% { box-shadow: 0 0 50px red, 0 0 100px blue, 0 0 200px white; }
-      100% { box-shadow: 0 0 20px red, 0 0 50px blue, 0 0 100px white; }
+      font-size: 48px; /* Increase font size for better readability */
+      margin-bottom: 20px; /* Add some space below the countdown */
     }
   </style>
 </head>
 <body>
-  <div class="background">
-    <div class="siren"></div>
-    <div class="countdown" id="countdown"></div>
-  </div>
-
+  <div class="countdown" id="countdown"></div>
   <script>
     // Set the date we're counting down to
-    var countDownDate = new Date("June 27, 2024 00:00:00").getTime();
+    var countDownDate = new Date("July 27, 2024 00:00:00").getTime();
 
     // Update the countdown every 1 second
     var x = setInterval(function() {
-      
       // Get the current date and time
       var now = new Date().getTime();
-      
+
       // Calculate the distance between now and the countdown date
       var distance = countDownDate - now;
-      
+
       // Calculate days, hours, minutes, and seconds
       var days = Math.floor(distance / (1000 * 60 * 60 * 24));
       var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      
+
       // Display the result in the element with id="countdown"
-      document.getElementById("countdown").innerHTML = "Days: " + days + " | Hours: " + hours + " | Minutes: " + minutes + " | Seconds: " + seconds;
-      
+      document.getElementById("countdown").innerHTML = days + " days " + hours + " hours "
+      + minutes + " minutes " + seconds + " seconds ";
+
       // If the countdown is over, display a message
       if (distance < 0) {
         clearInterval(x);
